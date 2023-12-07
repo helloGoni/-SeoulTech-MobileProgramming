@@ -2,9 +2,7 @@ package com.example.kmoocproject;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-//import javax.annotation.Generated;
 
-    //@Generated("jsonschema2pojo")
     public class Pagination {
 
         private long count;

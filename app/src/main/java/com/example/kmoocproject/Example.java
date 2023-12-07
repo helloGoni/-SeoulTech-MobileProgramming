@@ -3,13 +3,12 @@ package com.example.kmoocproject;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-//import javax.annotation.Generated;
+import java.util.ArrayList;
 
-//@Generated("jsonschema2pojo")
 public class Example {
 
     private Pagination pagination;
-    private List<Result> results;
+    private ArrayList<Result> results;
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     public Pagination getPagination() {
@@ -20,11 +19,11 @@ public class Example {
         this.pagination = pagination;
     }
 
-    public List<Result> getResults() {
+    public ArrayList<Result> getResults() {
         return results;
     }
 
-    public void setResults(List<Result> results) {
+    public void setResults(ArrayList<Result> results) {
         this.results = results;
     }
 

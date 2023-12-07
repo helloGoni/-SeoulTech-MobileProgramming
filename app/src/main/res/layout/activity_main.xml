@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:title="현재 진행중인 강좌 목록"
+        app:title="K-MOOC 강좌 목록"
         app:titleTextColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="47dp"
@@ -21,5 +21,25 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/prevBtn"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="20dp"
+            android:text="이전" />
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="다음" />
+    </LinearLayout>
 
 </LinearLayout>

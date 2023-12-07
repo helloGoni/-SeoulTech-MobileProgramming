@@ -2,12 +2,10 @@ package com.example.kmoocproject;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-//import javax.annotation.Generated;
 
-//@Generated("jsonschema2pojo")
 public class Result {
 
-    private String blocksUrl;
+    private String blocks_url;
     private String effort;
     private String end;
     private String enrollmentStart;
@@ -17,7 +15,7 @@ public class Result {
     private String name;
     private String number;
     private String org;
-    private String shortDescription;
+    private String short_description;
     private String start;
     private String startDisplay;
     private String startType;
@@ -56,11 +54,11 @@ public class Result {
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     public String getBlocksUrl() {
-        return blocksUrl;
+        return blocks_url;
     }
 
-    public void setBlocksUrl(String blocksUrl) {
-        this.blocksUrl = blocksUrl;
+    public void setBlocksUrl(String blocks_url) {
+        this.blocks_url = blocks_url;
     }
 
     public String getEffort() {
@@ -136,11 +134,11 @@ public class Result {
     }
 
     public String getShortDescription() {
-        return shortDescription;
+        return short_description;
     }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
+    public void setShortDescription(String short_description) {
+        this.short_description = short_description;
     }
 
     public String getStart() {

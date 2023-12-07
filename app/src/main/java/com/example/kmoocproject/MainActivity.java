@@ -24,11 +24,15 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     static RequestQueue requestQueue;
     RecyclerView recyclerView;
     ResultAdapter adapter;
+
+    int pageNum = 1;
 
     Toolbar toolbar;
     Example example;
@@ -46,22 +50,48 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ResultAdapter();
+        //adapter = new ResultAdapter();
         recyclerView.setAdapter(adapter);
 
-        makeRequest();
+        makeRequest(pageNum);
 
         toolbar = findViewById(R.id.toolbar);
+
+        Button nextBtn, prevBtn;
+        nextBtn = findViewById(R.id.nextBtn);
+        prevBtn = findViewById(R.id.prevBtn);
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ++pageNum;
+                makeRequest(pageNum);
+            }
+        });
+
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pageNum != 1) {
+                    --pageNum;
+                    makeRequest(pageNum);
+                }
+            }
+        });
+
+
     }
     /* 인증키
     l9L%2FQpQyMGS8NHn7URnUoHUInW51PZ8MqHs6aVaUoOxMfd%2FnukOJCiJjwTEMzyaGJtJwoWurugTGiCon40Yrqw%3D%3D
 
      */
 
-    public void makeRequest() {
+    public void makeRequest(int num) {
+        String temp = Integer.toString(num);
         String url = "http://apis.data.go.kr/B552881/kmooc/" +
                 "courseList?ServiceKey=l9L%2FQpQyMGS8NHn7URnUoHUInW51PZ8MqHs6aVaUoOxMfd%" +
-                "2FnukOJCiJjwTEMzyaGJtJwoWurugTGiCon40Yrqw%3D%3D&page=2";
+                "2FnukOJCiJjwTEMzyaGJtJwoWurugTGiCon40Yrqw%3D%3D&page=0" +
+                temp;
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,
@@ -75,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
         ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                /*Map<String, String> params = new HashMap<String, String>();
-                return params; */
                 Map<String, String> headers = super.getHeaders();
                 if (headers == null || headers.isEmpty()) {
                     headers = new HashMap<>();
@@ -92,14 +120,19 @@ public class MainActivity extends AppCompatActivity {
     public void println(String log) {Log.d("MainActivity",log);}
 
     public void processResponse(String response) {
-        Gson gson = new Gson();
-        //Gson gson = new GsonBuilder().setCharset(Charset.forName("UTF-8")).create();
-        example = gson.fromJson(response,Example.class);
 
-        for(int i=0;i<example.getResults().size();i++) {
-            Result result = example.getResults().get(i);
-            adapter.addItem(result);
-        }
-        adapter.notifyDataSetChanged();
+        Gson gson = new Gson();
+        example = gson.fromJson(response, Example.class);
+
+        ArrayList<Result> resultList = example.getResults();
+
+        if(resultList.get(0).getName() == null)
+            Log.d("DetailActivity", "다운에서부터 안대나");
+        recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new ResultAdapter(resultList);
+        recyclerView.setAdapter(adapter);
     }
 }
